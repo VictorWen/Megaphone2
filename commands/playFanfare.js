@@ -7,7 +7,7 @@ const max_falloff = 10000;
 
 module.exports = {
     data: {
-        name: "playfanfare",
+        name: "play",
         description: "Play your fanfare",
         type: "CHAT_INPUT",
     },

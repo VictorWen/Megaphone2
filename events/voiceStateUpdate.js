@@ -14,14 +14,15 @@ module.exports = {
         const userId = newState.member.id;
         const channelId = newState.channelId;
 
-        if (changedChannel && !isBot) {
+        const userData = data.getUserData(guildId, userId);
+
+        if (changedChannel && !isBot && userData.enabled) {
             joinVoiceChannel({
                 channelId: channelId,
                 guildId: guildId,
                 adapterCreator: newState.guild.voiceAdapterCreator,
             });
-
-            const userData = data.getUserData(guildId, userId);
+            
             const duration = userData.duration * 1000;
             let falloff = Math.min(duration, MAX_FALLOFF);
             let playtime = duration - falloff;

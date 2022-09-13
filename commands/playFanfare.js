@@ -1,4 +1,3 @@
-const path = require('path');
 const { getVoiceConnection, VoiceConnectionStatus } = require("@discordjs/voice");
 const { joinCurrentChannel } = require('../voiceUtils.js');
 const data = require('../data_management/JSONDataManager.js');

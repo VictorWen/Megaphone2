@@ -24,19 +24,22 @@ module.exports = {
         const guildFolder = `${config.data_folder}/${guildId}`;
         const userFile = `${guildFolder}/${userId}.json`;
 
-        if (!fs.existsSync(userFile))
-            return JSON.parse(fs.readFileSync(`${config.data_folder}/default.json`))
-
-        const data = JSON.parse(fs.readFileSync(userFile));
+        let data = JSON.parse(fs.readFileSync(`${config.data_folder}/default.json`));
+        if (fs.existsSync(userFile))
+            data = {...data, ...JSON.parse(fs.readFileSync(userFile))};
+        
         return data;
     },
     setUserData(guildId, userId, data) {
         const guildFolder = `${config.data_folder}/${guildId}`;
         const userFile = `${guildFolder}/${userId}.json`;
 
+        userData = this.getUserData(guildId, userId);
+        data = {...userData, ...data};
+
         if (!fs.existsSync(guildFolder))
             fs.mkdirSync(guildFolder);
 
-        fs.writeFileSync(userFile, JSON.stringify(data));
+        fs.writeFileSync(userFile, JSON.stringify(data, null, 4));
     }
 }

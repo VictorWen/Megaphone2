@@ -4,6 +4,7 @@ const data = require('../data_management/JSONDataManager.js');
 const { playMusicWithFalloff } = require("../voiceUtils.js")
 
 const max_falloff = 10000;
+const falloff_percent = 0.5;
 
 module.exports = {
     data: {
@@ -19,7 +20,7 @@ module.exports = {
 
         const userData = data.getUserData(guildId, userId);
         const duration = userData.duration * 1000;
-        let falloff = Math.min(duration, max_falloff);
+        let falloff = Math.min(falloff_percent * duration, max_falloff);
         let playtime = duration - falloff;
 
 
